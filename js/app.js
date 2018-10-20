@@ -14,11 +14,12 @@
      function pickGame(data) {
         let htmlContent = '';
         let gamePk = '';
-        // Goes through all games and opens selected game
+        // Goes through all todays games and opens selected game
         for (let i = 0; i < data.dates[0].games.length; i++) {
             htmlContent = `<option value="${data.dates[0].games[i].seriesDescription}">${data.dates[0].games[i].seriesDescription}</option>`
             gameSelector.innerHTML = htmlContent;
 
+            // Refreshes the current game selected every 10 seconds
             gameSelectorBtn.addEventListener('click', function() {
                 gamePk = `${data.dates[0].games[i].gamePk}`;
                 setInterval(function() {
@@ -30,6 +31,7 @@
         }
      }
 
+     // Displays game information
      function openGame(game) {
         select.style.display = 'none';
         backButton.display = 'block';
@@ -39,7 +41,7 @@
             .then(reponse => reponse.json())
             .then(pickGame);
         })
-        
+
         let htmlContent = '';
 
         // Teams
