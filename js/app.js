@@ -3,6 +3,8 @@
     const gameSelector = document.querySelector('#game-selector');
     const gameSelectorBtn = document.querySelector('#game-selector-button');
     const teams = document.querySelector('#teams');
+    const currentAtBat = document.querySelector('#current-atbat');
+    const backButton = document.querySelector('#back-button');
 
     // Fetch Request for todays games
     fetch('https://statsapi.mlb.com/api/v1/schedule?sportId=1')
@@ -30,6 +32,14 @@
 
      function openGame(game) {
         select.style.display = 'none';
+        backButton.display = 'block';
+
+        backButton.addEventListener('click',function() {
+            fetch('https://statsapi.mlb.com/api/v1/schedule?sportId=1')
+            .then(reponse => reponse.json())
+            .then(pickGame);
+        })
+        
         let htmlContent = '';
 
         // Teams
@@ -39,5 +49,18 @@
         teams.innerHTML = htmlContent;
 
         // Current At Bat
+        htmlContent = `<p>Pitcher: ${game.liveData.plays.currentPlay.matchup.pitcher.fullName} - ${game.liveData.plays.currentPlay.matchup.pitchHand.description}</p>
+        <p>Batter: ${game.liveData.plays.currentPlay.matchup.batter.fullName} - ${game.liveData.plays.currentPlay.matchup.batSide.description}</p>
+        <ul>
+            <li>Outs: ${game.liveData.linescore.outs}</li>
+            <li>Balls: ${game.liveData.linescore.balls}</li>
+            <li>Strikes: ${game.liveData.linescore.strikes}</li>
+        </ul>`
+
+        if (game.liveData.plays.currentPlay.about.isComplete === true) {
+            htmlContent += `<h4>${game.liveData.plays.currentPlay.result.description}</h4>`
+        } 
+
+        currentAtBat.innerHTML = htmlContent;
      }
 })();
