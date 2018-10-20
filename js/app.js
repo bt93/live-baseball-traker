@@ -56,7 +56,8 @@
         let htmlContent = '';
 
         if (game.gameData.status.statusCode === 'S') {
-            htmlContent = `<h1>${game.gameData.teams.away.name} at ${game.gameData.teams.home.name}</h1>
+            htmlContent = `<h1>${game.gameData.teams.away.name} (${game.gameData.teams.away.record.wins} - ${game.gameData.teams.away.record.losses}) at 
+            ${game.gameData.teams.home.name} (${game.gameData.teams.home.record.wins} - ${game.gameData.teams.home.record.losses})</h1>
             <h2>Game Preview</h2>
             <p>Scheduled Starters:</p>
             <p>${game.gameData.teams.away.abbreviation} ${game.gameData.probablePitchers.away.fullName}<br>
@@ -66,7 +67,8 @@
             teams.innerHTML = htmlContent;
         } else {
         // Teams
-        htmlContent = `<h1>${game.gameData.teams.away.name} at ${game.gameData.teams.home.name}</h1>
+        htmlContent = `<h1>${game.gameData.teams.away.name} (${game.gameData.teams.away.record.wins} - ${game.gameData.teams.away.record.losses}) at 
+        ${game.gameData.teams.home.name} (${game.gameData.teams.home.record.wins} - ${game.gameData.teams.home.record.losses})</h1>
         <h3>${game.gameData.teams.away.abbreviation} ${game.liveData.linescore.teams.away.runs} | ${game.gameData.teams.home.abbreviation} ${game.liveData.linescore.teams.home.runs}</h3>
         <h4>${game.liveData.linescore.inningHalf} of the ${game.liveData.linescore.currentInningOrdinal}</h4>`
         teams.innerHTML = htmlContent;
