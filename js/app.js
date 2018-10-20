@@ -38,8 +38,7 @@
         setInterval(function() {
             gamePk = `${game.gamePk}`;
                     fetch(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
-                    .then(reponse => reponse.json())
-                    .then(openGame);
+                    .then(reponse => reponse.json());
         }, 10000);
 
         backButton.addEventListener('click',function() {
@@ -51,7 +50,13 @@
         let htmlContent = '';
 
         if (game.gameData.status.statusCode === 'S') {
-            htmlContent = '';
+            htmlContent = `<h1>${game.gameData.teams.away.name} at ${game.gameData.teams.home.name}</h1>
+            <h2>Game Preview</h2>
+            <p>Scheduled Starters:</p>
+            <p>${game.gameData.teams.away.abbreviation} ${game.gameData.probablePitchers.away.fullName}<br>
+            <img src="https://securea.mlb.com/mlb/images/players/head_shot/${game.gameData.probablePitchers.away.id}.jpg" alt="${game.gameData.probablePitchers.away.id}""><br> 
+            ${game.gameData.teams.home.abbreviation} ${game.gameData.probablePitchers.home.fullName}<br>
+            <img src="https://securea.mlb.com/mlb/images/players/head_shot/${game.gameData.probablePitchers.home.id}.jpg" alt="${game.gameData.probablePitchers.home.id}""></p>`;
         } else {
         // Teams
         htmlContent = `<h1>${game.gameData.teams.away.name} at ${game.gameData.teams.home.name}</h1>
