@@ -32,7 +32,7 @@
      // Displays game information
      function openGame(game) {
         select.style.display = 'none';
-        backButton.display = 'block';
+        backButton.style.display = 'block';
 
         // Refreshes Live Data every 10 seconds
         setInterval(function() {
@@ -42,6 +42,9 @@
         }, 10000);
 
         backButton.addEventListener('click',function() {
+            teams.innerHTML = '';
+            select.style.display = 'block';
+            backButton.style.display = 'none';
             fetch('https://statsapi.mlb.com/api/v1/schedule?sportId=1')
             .then(reponse => reponse.json())
             .then(pickGame);
@@ -57,6 +60,7 @@
             <img src="https://securea.mlb.com/mlb/images/players/head_shot/${game.gameData.probablePitchers.away.id}.jpg" alt="${game.gameData.probablePitchers.away.id}""><br> 
             ${game.gameData.teams.home.abbreviation} ${game.gameData.probablePitchers.home.fullName}<br>
             <img src="https://securea.mlb.com/mlb/images/players/head_shot/${game.gameData.probablePitchers.home.id}.jpg" alt="${game.gameData.probablePitchers.home.id}""></p>`;
+            teams.innerHTML = htmlContent;
         } else {
         // Teams
         htmlContent = `<h1>${game.gameData.teams.away.name} at ${game.gameData.teams.home.name}</h1>
@@ -77,9 +81,8 @@
 
         if (game.liveData.plays.currentPlay.about.isComplete === true) {
             htmlContent += `<h4>${game.liveData.plays.currentPlay.result.description}</h4>`
-        } 
+        }
+        currentAtBat.innerHTML = htmlContent; 
     }
-
-        currentAtBat.innerHTML = htmlContent;
      }
 })();
