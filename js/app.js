@@ -34,21 +34,24 @@
         select.style.display = 'none';
         backButton.style.display = 'block';
 
-        // Refreshes Live Data every 10 seconds
-        setInterval(function() {
-            gamePk = `${game.gamePk}`;
-                    fetch(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
-                    .then(reponse => reponse.json());
-        }, 10000);
-
         backButton.addEventListener('click',function() {
+            clicked = true;
             teams.innerHTML = '';
             select.style.display = 'block';
             backButton.style.display = 'none';
             fetch('https://statsapi.mlb.com/api/v1/schedule?sportId=1')
             .then(reponse => reponse.json())
             .then(pickGame);
+            clearInterval(refresh);
         })
+
+         // Refreshes Live Data every 10 seconds
+        let refresh = setInterval(function() {
+                gamePk = `${game.gamePk}`;
+                        fetch(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
+                        .then(reponse => reponse.json());
+            }, 10000);
+
 
         let htmlContent = '';
 
