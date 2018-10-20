@@ -19,14 +19,12 @@
             htmlContent = `<option value="${data.dates[0].games[i].seriesDescription}">${data.dates[0].games[i].seriesDescription}</option>`
             gameSelector.innerHTML = htmlContent;
 
-            // Refreshes the current game selected every 10 seconds
+            // Request Data on chosen game
             gameSelectorBtn.addEventListener('click', function() {
                 gamePk = `${data.dates[0].games[i].gamePk}`;
-                setInterval(function() {
                     fetch(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
                     .then(reponse => reponse.json())
                     .then(openGame);
-                },10000);
         })
         }
      }
@@ -36,6 +34,14 @@
         select.style.display = 'none';
         backButton.display = 'block';
 
+        // Refreshes Live Data every 10 seconds
+        setInterval(function() {
+            gamePk = `${game.gamePk}`;
+                    fetch(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
+                    .then(reponse => reponse.json())
+                    .then(openGame);
+        }, 10000);
+
         backButton.addEventListener('click',function() {
             fetch('https://statsapi.mlb.com/api/v1/schedule?sportId=1')
             .then(reponse => reponse.json())
@@ -44,6 +50,9 @@
 
         let htmlContent = '';
 
+        if (game.gameData.status.statusCode === 'S') {
+            htmlContent = '';
+        } else {
         // Teams
         htmlContent = `<h1>${game.gameData.teams.away.name} at ${game.gameData.teams.home.name}</h1>
         <h3>${game.gameData.teams.away.abbreviation} ${game.liveData.linescore.teams.away.runs} | ${game.gameData.teams.home.abbreviation} ${game.liveData.linescore.teams.home.runs}</h3>
@@ -64,6 +73,7 @@
         if (game.liveData.plays.currentPlay.about.isComplete === true) {
             htmlContent += `<h4>${game.liveData.plays.currentPlay.result.description}</h4>`
         } 
+    }
 
         currentAtBat.innerHTML = htmlContent;
      }
