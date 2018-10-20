@@ -52,7 +52,9 @@
 
         // Current At Bat
         htmlContent = `<p>Pitcher: ${game.liveData.plays.currentPlay.matchup.pitcher.fullName} - ${game.liveData.plays.currentPlay.matchup.pitchHand.description}</p>
+        <img src="https://securea.mlb.com/mlb/images/players/head_shot/${game.liveData.plays.currentPlay.matchup.pitcher.id}.jpg" alt="${game.liveData.plays.currentPlay.matchup.pitcher.fullName}">
         <p>Batter: ${game.liveData.plays.currentPlay.matchup.batter.fullName} - ${game.liveData.plays.currentPlay.matchup.batSide.description}</p>
+        <img src="https://securea.mlb.com/mlb/images/players/head_shot/${game.liveData.plays.currentPlay.matchup.batter.id}.jpg" alt="${game.liveData.plays.currentPlay.matchup.batter.fullName}">
         <ul>
             <li>Outs: ${game.liveData.linescore.outs}</li>
             <li>Balls: ${game.liveData.linescore.balls}</li>
