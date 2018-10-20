@@ -19,9 +19,11 @@
 
             gameSelectorBtn.addEventListener('click', function() {
                 gamePk = `${data.dates[0].games[i].gamePk}`;
-                fetch(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
-                .then(reponse => reponse.json())
-                .then(openGame);
+                setInterval(function() {
+                    fetch(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
+                    .then(reponse => reponse.json())
+                    .then(openGame);
+                },10000);
         })
         }
      }
@@ -32,7 +34,8 @@
 
         // Teams
         htmlContent = `<h1>${game.gameData.teams.away.name} at ${game.gameData.teams.home.name}</h1>
-        <h3>${game.gameData.teams.away.abbreviation} ${game.liveData.linescore.teams.away.runs} | ${game.gameData.teams.home.abbreviation} ${game.liveData.linescore.teams.home.runs}</h3>`
+        <h3>${game.gameData.teams.away.abbreviation} ${game.liveData.linescore.teams.away.runs} | ${game.gameData.teams.home.abbreviation} ${game.liveData.linescore.teams.home.runs}</h3>
+        <h4>${game.liveData.linescore.inningHalf} of the ${game.liveData.linescore.currentInningOrdinal}</h4>`
         teams.innerHTML = htmlContent;
 
         // Current At Bat
