@@ -9,6 +9,7 @@
  */
 angular.module('mlbLiveGameApp')
   .controller('TodaysgamesCtrl', function($http, $scope, $interval) {
+
   		function callAtInterval() {
   			// Request Info for todays games
   		$http.get('https://statsapi.mlb.com/api/v1/schedule?sportId=1')
@@ -22,7 +23,8 @@ angular.module('mlbLiveGameApp')
   	// Refresh request every 10 seconds
   	$interval(callAtInterval, 10000);
 
-  	function openGame(gamePk) {
-  		
+  	$scope.openGame = function(gamePk) {
+  		console.log(gamePk);
+  		$('.todays-games').hide();
   	};
   });
