@@ -1,1 +1,10 @@
-<h1>{{game}}</h1>
+<div>
+	<ul ng-repeat="game in games.dates[0].games">
+		<li>
+			<h3>{{ game.description }}</h3>
+			<h4>{{ game.teams.away.team.name }} @ {{ game.teams.home.team.name }}</h4>
+			<p>{{ game.teams.away.score }} | {{ game.teams.home.score }} <span ng-if="game.status.statusCode === 'I'">Live</span></p>
+			<button>Details</button>
+		</li>
+	</ul>
+</div>
