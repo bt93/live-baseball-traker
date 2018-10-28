@@ -10,7 +10,7 @@
 angular.module('mlbLiveGameApp')
   .controller('TodaysgamesCtrl', function($http, $scope, $interval) {
 
-  		function callAtInterval() {
+  		function callTodaysGames() {
   			// Request Info for todays games
   		$http.get('https://statsapi.mlb.com/api/v1/schedule?sportId=1')
   		.then(function(response) {
@@ -19,12 +19,13 @@ angular.module('mlbLiveGameApp')
   	});
   	}
   	// First call when page opens
-  	callAtInterval();
+  	callTodaysGames();
   	// Refresh request every 10 seconds
-  	$interval(callAtInterval, 10000);
+  	var callAtInterval = $interval(callTodaysGames, 10000);
 
   	$scope.openGame = function(gamePk) {
   		console.log(gamePk);
-  		$('.todays-games').hide();
+  		// Ends request refresh
+  		$interval.cancel(callAtInterval);
   	};
   });

@@ -1,9 +1,11 @@
-<div>
+<div ng-if="games.totalGames > 0">
 	<ul ng-repeat="game in games.dates[0].games">
 		<li>
 			<h3>{{ game.description }}</h3>
-			<h4>{{ game.teams.away.team.name }} @ {{ game.teams.home.team.name }}</h4>
-			<p>{{ game.teams.away.score }} | {{ game.teams.home.score }} <span ng-if="game.status.statusCode === 'I'">Live</span></p>
+			<p>{{ game.venue.name }}</p>
+			<h4>{{ game.teams.away.team.name }} {{ game.teams.away.score }} <span ng-if="game.status.statusCode === 'P' || game.status.statusCode === 'S'">({{ game.teams.away.leagueRecord.wins }} - {{ game.teams.away.leagueRecord.losses }})</span><br>
+			{{ game.teams.home.team.name }} {{ game.teams.home.score }} <span ng-if="game.status.statusCode === 'P' || game.status.statusCode === 'S'">({{ game.teams.home.leagueRecord.wins }} - {{ game.teams.home.leagueRecord.losses }})</span></h4>
+			<p ng-if="game.status.statusCode === 'I'">Live</p>
 			<button ng-click="openGame(game.gamePk)">Details</button>
 		</li>
 	</ul>
