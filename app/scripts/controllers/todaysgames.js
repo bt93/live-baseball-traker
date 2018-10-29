@@ -27,5 +27,11 @@ angular.module('mlbLiveGameApp')
   		console.log(gamePk);
   		// Ends request refresh
   		$interval.cancel(callAtInterval);
+  		$('.todays-games').hide();
+  		$http.get(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
+  		.then(function(response) {
+  			$scope.currentGame = response.data;
+  			console.log($scope.currentGame); 
+  		})
   	};
   });

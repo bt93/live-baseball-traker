@@ -9,5 +9,5 @@
  */
 // angular.module('mlbLiveGameApp')
 //   .controller('OpengameCtrl', function ($http, $scope, $interval) {
-    
+
 //   });
