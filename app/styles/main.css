@@ -9,6 +9,11 @@ body {
   padding: 0;
 }
 
+.team-logo {
+  width:30px;
+  height:30px;
+}
+
 li {
   list-style: none;
   padding-bottom: 2em;
