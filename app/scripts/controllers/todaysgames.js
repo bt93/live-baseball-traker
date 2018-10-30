@@ -34,7 +34,8 @@ angular.module('mlbLiveGameApp')
   	};
 
     $scope.displayGame = function(gamePk) {
-      $http.get(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
+      // Request info for selected game
+      $http.get("https://statsapi.mlb.com/api/v1.1/game/" + gamePk + "/feed/live")
       .then(function(response) {
         $scope.info = response.data;
         console.log($scope.info);
