@@ -1,1 +1,13 @@
-<p>This is the opengame view.</p>
+<div ng-if="info.gameData.status.statusCode === 'F'">
+	<h1>{{ info.gameData.teams.away.name }} @ {{ info.gameData.teams.home.name }}</h1>
+	<p>{{ info.gameData.venue.name }} - {{ info.gameData.venue.location.city }}, {{ info.gameData.venue.location.state }}</p>
+	<p>{{ info.gameData.datetime.dateTime | date: "medium" }}</p>
+	<table>
+		<tr>
+			<th><img class="team-logo" src="https://www.mlbstatic.com/team-logos/{{ info.gameData.teams.away.id }}.svg"></th>
+		</tr>
+		<tr>
+			<th><img class="team-logo" src="https://www.mlbstatic.com/team-logos/{{ info.gameData.teams.home.id}}.svg"></th>
+		</tr>
+	</table>
+</div>

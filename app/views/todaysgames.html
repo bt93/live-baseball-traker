@@ -1,11 +1,11 @@
-<div ng-if="games.totalGames > 0">
+<div ng-if="games.totalGames > 0" class="todays-games">
 	<ul ng-repeat="game in games.dates[0].games">
 		<li>
 			<h3>{{ game.description }}</h3>
 			<p>{{ game.venue.name }}</p>
-			<h4><img class="team-logo" src="https://www.mlbstatic.com/team-logos/{{ game.teams.away.team.id }}.svg"> {{ game.teams.away.team.name }} {{ game.teams.away.score }} <span ng-if="game.status.statusCode === 'P' || game.status.statusCode === 'S' || game.status.statusCode === 'F'">({{ game.teams.away.leagueRecord.wins }} - {{ game.teams.away.leagueRecord.losses }})</span><br>
+			<h4><img class="team-logo" src="https://www.mlbstatic.com/team-logos/{{ game.teams.away.team.id }}.svg"> {{ game.teams.away.team.name }} - {{ game.teams.away.score }} <span ng-if="game.status.statusCode === 'P' || game.status.statusCode === 'S' || game.status.statusCode === 'F'"> | ({{ game.teams.away.leagueRecord.wins }} - {{ game.teams.away.leagueRecord.losses }})</span><br>
 			<img class="team-logo" src="https://www.mlbstatic.com/team-logos/{{ game.teams.home.team.id }}.svg">
-			{{ game.teams.home.team.name }} {{ game.teams.home.score }} <span ng-if="game.status.statusCode === 'P' || game.status.statusCode === 'S' || game.status.statusCode === 'F'">({{ game.teams.home.leagueRecord.wins }} - {{ game.teams.home.leagueRecord.losses }})</span></h4>
+			{{ game.teams.home.team.name }} - {{ game.teams.home.score }} <span ng-if="game.status.statusCode === 'P' || game.status.statusCode === 'S' || game.status.statusCode === 'F'"> | ({{ game.teams.home.leagueRecord.wins }} - {{ game.teams.home.leagueRecord.losses }})</span></h4>
 			<p ng-if="game.status.statusCode === 'F'">Final</p>
 			<p ng-if="game.status.statusCode === 'I'">Live</p>
 			<p ng-if="game.status.statusCode === 'P' || game.status.statusCode === 'S'">Preview</p>
@@ -14,3 +14,4 @@
 	</ul>
 </div>
 <div ng-if="games.totalGames === 0">There are no scheduled games today.</div>
+<div ng-include="'views/opengame.html'"></div>

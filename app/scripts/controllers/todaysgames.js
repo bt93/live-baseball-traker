@@ -25,9 +25,19 @@ angular.module('mlbLiveGameApp')
   	$scope.callAtInterval = $interval(callTodaysGames, 50000);
 
   	$scope.openGame = function(gamePk) {
-  		console.log(gamePk);
+  		// console.log(gamePk);
   		// Ends request refresh
   		$interval.cancel($scope.callAtInterval);
-
+      $('.todays-games').hide();
+      $('.header').hide();
+      $scope.displayGame(gamePk);
   	};
+
+    $scope.displayGame = function(gamePk) {
+      $http.get(`https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`)
+      .then(function(response) {
+        $scope.info = response.data;
+        console.log($scope.info);
+      });
+    };
   });
