@@ -30,6 +30,7 @@ angular.module('mlbLiveGameApp')
   		$interval.cancel($scope.callAtInterval);
       $('.todays-games').hide();
       $('.header').hide();
+      $('.current-game').show();
       $scope.displayGame(gamePk);
   	};
 
@@ -41,4 +42,11 @@ angular.module('mlbLiveGameApp')
         console.log($scope.info);
       });
     };
+
+    $scope.backButton = function() {
+      $scope.callAtInterval = $interval(callTodaysGames, 50000);
+      $('.todays-games').show();
+      $('.header').show();
+      $('.current-game').hide();
+    }
   });

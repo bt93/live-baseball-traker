@@ -3,11 +3,31 @@
 	<p>{{ info.gameData.venue.name }} - {{ info.gameData.venue.location.city }}, {{ info.gameData.venue.location.state }}</p>
 	<p>{{ info.gameData.datetime.dateTime | date: "medium" }}</p>
 	<table>
-		<tr>
-			<th><img class="team-logo" src="https://www.mlbstatic.com/team-logos/{{ info.gameData.teams.away.id }}.svg"></th>
+		<tr class="linescore top">
+			<th>Inning</th>
+			<th class="innings top" ng-repeat="innings in info.liveData.linescore.innings">{{innings.num}}</th>
+			<th class="innings">Runs</th>
+			<th class="innings">Hits</th>
+			<th class="innings">Errors</th>
 		</tr>
 		<tr>
-			<th><img class="team-logo" src="https://www.mlbstatic.com/team-logos/{{ info.gameData.teams.home.id}}.svg"></th>
+			<th class="linescore">{{ info.gameData.teams.away.abbreviation }}</th>
+			<th class="innings" ng-repeat="innings in info.liveData.linescore.innings">{{ innings.away.runs }}</th>
+			<th class="innings">{{ info.liveData.linescore.teams.away.runs }}</th>
+			<th class="innings">{{ info.liveData.linescore.teams.away.hits }}</th>
+			<th class="innings">{{ info.liveData.linescore.teams.away.errors }}</th>
+		</tr>
+		<tr>
+			<th class="linescore">{{ info.gameData.teams.home.abbreviation }}</th>
+			<th class="innings" ng-repeat="innings in info.liveData.linescore.innings">{{ innings.home.runs }}</th>
+			<th class="innings">{{ info.liveData.linescore.teams.home.runs }}</th>
+			<th class="innings">{{ info.liveData.linescore.teams.home.hits }}</th>
+			<th class="innings">{{ info.liveData.linescore.teams.home.errors }}</th>
 		</tr>
 	</table>
+	<h3>Win: <a href="https://www.mlb.com/player/{{ info.liveData.decisions.winner.id }}" target="_blank">{{ info.liveData.decisions.winner.fullName }}</a> | Loss: <a href="https://www.mlb.com/player/{{ info.liveData.decisions.loser.id }}" target="_blank">{{ info.liveData.decisions.loser.fullName }}</a> <span ng-if="info.liveData.decisions.save">| Save: <a href="https://www.mlb.com/player/{{ info.liveData.decisions.save.id }}" target="_blank">{{ info.liveData.decisions.save.fullName }}</a></h3>
+	<div ng-repeat="data in info.liveData.boxscore.info">
+		<p>{{ data.label }}: {{ data.value }}</p>
+	</div>
 </div>
+<button ng-click="backButton()">Return</button>

@@ -19,6 +19,19 @@ li {
   padding-bottom: 2em;
   border-bottom: .4px solid black;
 }
+.innings {
+  padding: 1.5em;
+  padding-bottom: .5em;
+  border: 2px black solid;
+}
+
+.top {
+  padding-top: .2em;
+}
+
+.linescore {
+  border: 2px black solid;
+}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
