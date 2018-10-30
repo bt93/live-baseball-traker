@@ -8,6 +8,7 @@
 			{{ game.teams.home.team.name }} {{ game.teams.home.score }} <span ng-if="game.status.statusCode === 'P' || game.status.statusCode === 'S' || game.status.statusCode === 'F'">({{ game.teams.home.leagueRecord.wins }} - {{ game.teams.home.leagueRecord.losses }})</span></h4>
 			<p ng-if="game.status.statusCode === 'F'">Final</p>
 			<p ng-if="game.status.statusCode === 'I'">Live</p>
+			<p ng-if="game.status.statusCode === 'P' || game.status.statusCode === 'S'">Preview</p>
 			<button ng-click="openGame(game.gamePk)">Details</button>
 		</li>
 	</ul>

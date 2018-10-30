@@ -8,6 +8,5 @@
  * Controller of the mlbLiveGameApp
  */
 // angular.module('mlbLiveGameApp')
-//   .controller('OpengameCtrl', function ($http, $scope, $interval) {
-
+//   .controller('OpengameCtrl', function ($http, $interval) {
 //   });
