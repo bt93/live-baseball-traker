@@ -19,14 +19,15 @@ li {
   padding-bottom: 2em;
   border-bottom: .4px solid black;
 }
+
 .innings {
-  padding: 1.5em;
+  padding: 0.4em;
   padding-bottom: .5em;
   border: 2px black solid;
 }
 
 .top {
-  padding-top: .2em;
+  padding-top: 1.2em;
 }
 
 .linescore {
